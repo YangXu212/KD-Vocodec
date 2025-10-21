@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KD-Vocodec: Low-Resource Audio Codec</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="hero-background"></div>
+    
+    <header class="hero">
+        <div class="container">
+            <h1 class="title-main">KD-Vocodec</h1>
+            <p class="subtitle">A Low-Complexity Model For Joint Speech Coding And Enhancement Using Knowledge Distillation</p>
+            <div class="hero-badges">
+                <span class="badge">ICASSP 2025 Low-Resource Audio Codec (LRAC) Challenge</span>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Authors Section -->
+        <section class="authors-section">
+            <div class="authors-grid">
+                <div class="author">Yang Xu<sup>1,2</sup></div>
+                <div class="author">Ronghui Hu<sup>1,2</sup></div>
+                <div class="author">Leyan Yang<sup>1,2</sup></div>
+                <div class="author">Jing Lu<sup>1,2</sup></div>
+            </div>
+            <div class="affiliations">
+                <p><sup>1</sup>Key Laboratory of Modern Acoustics, Nanjing University, Nanjing, 210093, Jiangsu, China</p>
+                <p><sup>2</sup>NJU-Horizon Intelligent Audio Lab, Horizon Robotics, Beijing, 100094, Beijing, China</p>
+            </div>
+            <div class="author-links">
+                <a href="#" class="link-button">📄 Paper</a>
+            </div>
+        </section>
+
+        <!-- Abstract Section -->
+        <section class="abstract-section">
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract-card">
+                <p>
+                    The advancement of speech interfaces operating in resource-constrained environments 
+                    drives the need for neural speech codecs that achieve a critical balance among computational 
+                    efficiency, minimized bitrate, and low latency. These codecs must also maintain high perceptual 
+                    quality in adverse acoustic environments, demonstrating robustness to real-world noise and 
+                    reverberation. In this paper, we propose <strong>KD-Vocodec</strong>, a novel framework that tackles this challenge 
+                    via feature-level knowledge distillation for joint speech coding and enhancement. Our approach 
+                    employs a feature-level knowledge distillation framework to train a compact student encoder that 
+                    directly reconstructs the intermediate representations of a pre-trained, high-fidelity teacher 
+                    codec, aligning the student's output features with the teacher's clean-speech embeddings. Operating 
+                    at a low latency of <strong>30 ms</strong> with scalable bitrates from <strong>1 to 6 kbps</strong>, and demonstrating superior performance 
+                    across multiple objective and subjective metrics under strict low-resource constraints, KD-Vocodec ranked 
+                    <strong>2nd</strong> in Track 2 of the <strong>ICASSP 2025 Low-Resource Audio Codec (LRAC) Challenge</strong>.
+                </p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">1.28G</div>
+                        <div class="stat-label">MACs</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">12.65M</div>
+                        <div class="stat-label">Parameters</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">30ms</div>
+                        <div class="stat-label">Latency</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Audio Samples Section -->
+        <section class="audio-section">
+            <h2 class="section-title">Audio Samples</h2>
+            <p class="section-subtitle">Comparative results across different bitrates and acoustic conditions</p>
+            
+            <!-- 1 kbps Section -->
+            <div class="bitrate-section">
+                <div class="bitrate-header">
+                    <h3 class="bitrate-title">1 kbps</h3>
+                    <span class="bitrate-badge">Ultra Low Bitrate</span>
+                </div>
+                
+                <div class="samples-grid">
+                    <!-- Clean Sample -->
+                    <div class="sample-card">
+                        <div class="sample-header">
+                            <h4>Clean Speech</h4>
+                            <span class="condition-tag clean">Clean</span>
+                        </div>
+                        <div class="audio-comparison">
+                            <div class="audio-block">
+                                <div class="audio-label">
+                                    <span class="label-icon">📥</span>
+                                    <span>Original</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/1kbps/clean_original.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            <div class="audio-block highlight">
+                                <div class="audio-label">
+                                    <span class="label-icon">✨</span>
+                                    <span>KD-Vocodec</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/1kbps/clean_kdvocodec.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            <div class="audio-block reference">
+                                <div class="audio-label">
+                                    <span class="label-icon">🎯</span>
+                                    <span>Target</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/1kbps/clean_target.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Noisy Sample -->
+                    <div class="sample-card">
+                        <div class="sample-header">
+                            <h4>Noisy Speech</h4>
+                            <span class="condition-tag noisy">Noisy</span>
+                        </div>
+                        <div class="audio-comparison">
+                            <div class="audio-block">
+                                <div class="audio-label">
+                                    <span class="label-icon">📥</span>
+                                    <span>Original</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/1kbps/noisy_original.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            <div class="audio-block highlight">
+                                <div class="audio-label">
+                                    <span class="label-icon">✨</span>
+                                    <span>KD-Vocodec</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/1kbps/noisy_kdvocodec.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            <div class="audio-block reference">
+                                <div class="audio-label">
+                                    <span class="label-icon">🎯</span>
+                                    <span>Target</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/1kbps/noisy_target.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reverb Sample -->
+                    <div class="sample-card">
+                        <div class="sample-header">
+                            <h4>Reverberant Speech</h4>
+                            <span class="condition-tag reverb">Reverb</span>
+                        </div>
+                        <div class="audio-comparison">
+                            <div class="audio-block">
+                                <div class="audio-label">
+                                    <span class="label-icon">📥</span>
+                                    <span>Original</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/1kbps/reverb_original.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            <div class="audio-block highlight">
+                                <div class="audio-label">
+                                    <span class="label-icon">✨</span>
+                                    <span>KD-Vocodec</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/1kbps/reverb_kdvocodec.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            <div class="audio-block reference">
+                                <div class="audio-label">
+                                    <span class="label-icon">🎯</span>
+                                    <span>Target</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/1kbps/reverb_target.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6 kbps Section -->
+            <div class="bitrate-section">
+                <div class="bitrate-header">
+                    <h3 class="bitrate-title">6 kbps</h3>
+                    <span class="bitrate-badge">Low Bitrate</span>
+                </div>
+                
+                <div class="samples-grid">
+                    <!-- Clean Sample -->
+                    <div class="sample-card">
+                        <div class="sample-header">
+                            <h4>Clean Speech</h4>
+                            <span class="condition-tag clean">Clean</span>
+                        </div>
+                        <div class="audio-comparison">
+                            <div class="audio-block">
+                                <div class="audio-label">
+                                    <span class="label-icon">📥</span>
+                                    <span>Original</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/6kbps/clean_original.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            <div class="audio-block highlight">
+                                <div class="audio-label">
+                                    <span class="label-icon">✨</span>
+                                    <span>KD-Vocodec</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/6kbps/clean_kdvocodec.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            <div class="audio-block reference">
+                                <div class="audio-label">
+                                    <span class="label-icon">🎯</span>
+                                    <span>Target</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/6kbps/clean_target.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Noisy Sample -->
+                    <div class="sample-card">
+                        <div class="sample-header">
+                            <h4>Noisy Speech</h4>
+                            <span class="condition-tag noisy">Noisy</span>
+                        </div>
+                        <div class="audio-comparison">
+                            <div class="audio-block">
+                                <div class="audio-label">
+                                    <span class="label-icon">📥</span>
+                                    <span>Original</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/6kbps/noisy_original.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            <div class="audio-block highlight">
+                                <div class="audio-label">
+                                    <span class="label-icon">✨</span>
+                                    <span>KD-Vocodec</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/6kbps/noisy_kdvocodec.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            <div class="audio-block reference">
+                                <div class="audio-label">
+                                    <span class="label-icon">🎯</span>
+                                    <span>Target</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/6kbps/noisy_target.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reverb Sample -->
+                    <div class="sample-card">
+                        <div class="sample-header">
+                            <h4>Reverberant Speech</h4>
+                            <span class="condition-tag reverb">Reverb</span>
+                        </div>
+                        <div class="audio-comparison">
+                            <div class="audio-block">
+                                <div class="audio-label">
+                                    <span class="label-icon">📥</span>
+                                    <span>Original</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/6kbps/reverb_original.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            <div class="audio-block highlight">
+                                <div class="audio-label">
+                                    <span class="label-icon">✨</span>
+                                    <span>KD-Vocodec</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/6kbps/reverb_kdvocodec.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            <div class="audio-block reference">
+                                <div class="audio-label">
+                                    <span class="label-icon">🎯</span>
+                                    <span>Target</span>
+                                </div>
+                                <audio controls>
+                                    <source src="audio/6kbps/reverb_target.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Citation Section -->
+        <section class="citation-section">
+            <h2 class="section-title">Citation</h2>
+            <div class="citation-card">
+                <pre><code>@inproceedings{kdvocodec2025,
+  title={KD-Vocodec: A Low-Complexity Model For Joint Speech Coding And Enhancement Using Knowledge Distillation},
+  author={Xu, Yang and Hu, Ronghui and Yang, Leyan and Lu, Jing},
+  booktitle={ICASSP 2025},
+  year={2025}
+}</code></pre>
+                <button class="copy-button" onclick="copyCode()">📋 Copy</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 KD-Vocodec Team. All rights reserved.</p>
+            <p class="footer-note">For research purposes only.</p>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
