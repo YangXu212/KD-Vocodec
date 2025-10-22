@@ -1,5 +1,5 @@
 
-# KD-Vocodec Demo Website
+# KD-Vocodec
 
 Official audio demonstration website for **KD-Vocodec: A Low-Complexity Model For Joint Speech Coding And Enhancement Using Knowledge Distillation**.
 
